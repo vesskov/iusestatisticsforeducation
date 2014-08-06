@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <link rel="stylesheet" href="./iuse/css/main.css">
+  <title>Chart your input - I-USE  -  statistics for education</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script>
+  
+var $j = jQuery.noConflict(); 
+jQuery(document).ready(function($j){
+  jQuery('#close').click(function ($j) {
+    jQuery('#overlay').hide(450);
+    //history.go(-1);
+    window.location.hash.split('#')[0];
+  });
+  jQuery('#all').click(function($j){
+    console.log(jQuery('#all').prop('checked'));
+  });
+  window.onhashchange = function (event) {
+    if (window.location.hash == 0) {
+      jQuery('#overlay').hide(450);
+    } else {
+      var openOverlay = window.location.hash.replace("#","");
+      IUse.openChart(openOverlay, mapCenter);
+    }
+  };
+  if (window.location.hash != 0) {
+    var openOverlay = window.location.hash.replace("#","");
+    IUse.openChart(openOverlay, mapCenter);
+  }  
+});
+
+$j('html').keyup(function( event ) {
+  var code = event.keyCode || event.which;
+  if(code == 8) { //Enter keycode
+    jQuery('#overlay').hide(450);
+    event.preventDefault();
+  }
+});    
+
+var pathname = window.location.pathname;
+if (pathname.match('world-statistics') != null ) {
+  var mapCenter = 'world';
+} else {
+  var mapCenter = 'europe';
+}   
+</script> 
+</head>
+ <body>
+Chart your input<br>		
+<div id="vis"> </div>
+<textarea id="textCSV" rows="10" cols="50"></textarea><br /> <input onclick="IUse.getCsvTable(jQuery('#vis'), jQuery('textarea#textCSV').val());" type="button" value="submit" /></p>
+<select id="mapCenter">
+<option value="europe">Map zoom on Europe</option>
+<option value="world">Map zoom on World</option>
+</select>
+<div id="vis">This tool allows users to create a graph or map from their own data, with remarkable ease and speed. <span style="line-height: 1.3em;">Once entered, data will be visualised in a number of formats, added to a map if location data is available, and made available to download as a CSV file for use in other tools and applications.</span></div>
+<div>There is a simple format that is required for the data entry.</div>
+<div>Enter years in the following format e.g. ,2012,2013,2014 would plot the years 2012-2014</div>
+<div>Note the use of a comma at the start of the line</div>
+<div>On the following lines, enter the data header, followed by the data itself, separated by commas</div>
+<div>e.g.</div>
+<div>France,56,67,43</div>
+<div>Germany,78,84,43</div>
+<div>Click SUBMIT to see the data as a table, then choose from the options at the top to create graphs or maps, and download the data.</div>
+<div><em><strong>Try it now.</strong></em></div>
+<p>Example input:</p>
+<p><textarea rows="10" cols="50">GDP at market prices - Billions of euro,
+,2000,2005,2010,2012,2015
+Belgium,253 ,303 ,356 ,376 ,405
+Bulgaria,14 ,23 ,36 ,40 ,44
+Czech Republic,64 ,105 ,150 ,153 ,160
+Denmark,174 ,207 ,236 ,245 ,266
+Greece,138 ,193 ,222 ,194 ,189
+Sweden,268 ,298 ,350 ,408 ,453
+United Kingdom,1620 ,1867 ,1732 ,1930 ,2043 
+Source: Eurostat Database 12/2013 extracted by Karsten Duus.,
+NB : 2015 is a forecast.,</textarea></p> 
+<div id="overlay" style="display: none;">
+  <div id="close">X</div>
+  <div id="holder"></div>
+</div>										
+<script src="./iuse/js/iuse.js"></script>					
+<script>
+    if ( jQuery('#tableLoad').attr('name') != undefined && jQuery('#tableLoad').attr('name').length == 32) {
+      IUse.getCsvTable(jQuery('#tableLoad'), jQuery('#tableLoad').attr('name'));
+    } else if (jQuery('#tableLoad').html()  != undefined ) {
+      IUse.getCsvTable(jQuery('#tableLoad'));
+    }
+    </script>
+</body>
+</html>

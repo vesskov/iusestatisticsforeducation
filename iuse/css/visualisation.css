@@ -1,0 +1,178 @@
+body,html {
+  background: #ffffff;
+  overflow: hidden;
+  margin: 0px;
+  font-family: Helvetica,Arial, Sans-Serif;
+  font-size: 62.5%;
+}
+#add_colors {
+	margin-top: 15px;
+	padding-left: 65px;
+	clear:both;
+}
+#choose_color_settings{
+	
+}
+#visualization{
+	max-width: 960px; 
+	max-height:610px;
+	position: absolute;
+	top:25px;
+	left:0px;
+}
+
+#postfield{
+	z-index: 2;
+	color: rgb(228, 228, 228);
+	float:left;
+	margin-left: 1.3em;
+}
+#submitfield {
+	float:left;
+}
+#clear{
+	clear:both;
+}
+.green{
+	background: #00ff00;
+}
+.red{
+	background: #ff0000;
+}
+.brown{
+	background: #cc6600;
+}
+.orange{
+	background: #ff6600;
+}
+.yellow{
+	background: #ffff00;
+}
+.blue{
+	background: #0000ff;
+}
+.field{
+	font-size:  1.3em;
+}
+.value{
+	width: 60px;
+	float:right;
+	padding-left: 2px;
+}
+.color{
+	width: 20px;
+	float: right;
+	padding-left: 2px;
+}
+#subNav {
+	background: #89B6B6;
+	height: 23px;
+	z-index: 10;
+    display: -moz-inline-box;
+    display: -ms-inline-flexbox;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+	width: 100%;
+	padding-top: 0.5em;
+	font-size: 1.3em;
+	margin-right: 1px;
+}
+#topNav {
+	background: #000 url(/handlecsv/images/menutop-bg.png) 50% 0;	
+	height:30px;
+}
+#logoSmall {
+	z-index:11;
+	width: 110px;
+	height: 100px;
+	position:absolute;
+	bottom: 2px;
+	right: 2px;
+	background: url(http://i-use.eu/handlecsv/images/logo.png) no-repeat;
+}
+
+input, select {
+	margin-left: 3px;
+	font-size:  1.1em;
+	border: solid 1px #ccc;
+	border-radius: 5px;
+	height:17px;
+	background: #ebe9f9; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ebe9f9 0%, #ebe5fc 50%, #efeef3 51%, #eaeaf5 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ebe9f9), color-stop(50%,#ebe5fc), color-stop(51%,#efeef3), color-stop(100%,#eaeaf5)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ebe9f9 0%,#ebe5fc 50%,#efeef3 51%,#eaeaf5 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ebe9f9 0%,#ebe5fc 50%,#efeef3 51%,#eaeaf5 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ebe9f9 0%,#ebe5fc 50%,#efeef3 51%,#eaeaf5 100%); /* IE10+ */subTitle
+	background: linear-gradient(to bottom,  #ebe9f9 0%,#ebe5fc 50%,#efeef3 51%,#eaeaf5 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebe9f9', endColorstr='#eaeaf5',GradientType=0 ); /* IE6-9 */
+	vertical-align: middle;
+
+}
+
+#subTitle {
+	margin-left: 0.5em;
+	height: 35px;
+	margin-top: 0;
+	font-weight: normal;
+	font-size:  1.7em;
+	padding: 0;
+	letter-spacing: normal;
+	text-transform: lowercase;
+	color: #6da5a2;
+	position: absolute;
+	top:25px;
+}
+
+#subSource {
+	font-weight: normal;
+	font-size:  1.5em;
+	padding: 0;
+	letter-spacing: normal;
+	text-transform: lowercase;
+	color: #6da5a2;
+	position: absolute;
+	bottom:2px;
+	right:120px;	
+}
+
+
+span {
+	color: #fff;
+}
+
+@media screen and (max-width:400px) { 
+	#logoSmall {
+	    width: 55px;
+	    height: 50px;
+		background: url(http://i-use.eu/handlecsv/images/logo_55.png) no-repeat;
+	}
+	#postfield {
+		font-size:  1.1em;
+	}
+	input, select {
+		font-size:  1.1em;
+	}
+	#subSource {
+		font-size:  1.3em;
+		right:57px;	
+	}
+}
+
+@media screen and (max-height:400px) { 
+	#logoSmall {
+	    width: 55px;
+	    height: 50px;
+		background: url(http://i-use.eu/handlecsv/images/logo_55.png) no-repeat;
+	}
+	#postfield {
+		font-size:  1.1em;
+	}
+	input, select {
+		font-size:  1.1em;
+	}
+	#subSource {
+		font-size:  1.3em;
+		right:57px;	
+	}
+}
+

@@ -1,0 +1,214 @@
+.tableClass{
+	background: rgb(230, 230, 233);
+	line-height: 1.1;
+	border-spacing: 1px;
+}
+.firstRowClass{
+	font-size: 11px;
+	font-weight: bold;
+	background: rgb(240,240,240);
+	padding: 1px;
+	min-width: 47px;
+}
+.evenRowClass{
+	font-size: 10px;
+	background: rgb(255,250,250) ;
+	padding: 1px;
+}
+.oddRowClass{
+	font-size: 10px;
+	background: rgb(241,241,241) ;
+	padding: 1px;
+}
+.alignLeft{
+	text-align: left;
+}
+.alignRight{
+	text-align: right;
+}
+.sortUp{
+	background:url(/handlecsv/images/arrow_up.png) no-repeat;
+	min-width: 14px;
+	height: 6px;
+	text-decoration: none;
+	font-size: 7px;
+}
+.sortDown{
+	background:url(/handlecsv/images/arrow_down.png) no-repeat;
+	min-width: 14px;
+	height: 6px;	
+	text-decoration: none;
+	font-size: 7px;
+}
+.deleteEntry{
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-left:5px;
+	padding-right:4px;
+	cursor: pointer;
+}
+.emptyCell{
+	background: #fff;
+}
+.classname {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:11px;
+	font-weight:bold;
+	padding:1px 3px;
+	text-decoration:none;
+	text-shadow:4px 1px 3px #ffffff;
+	margin-bottom: 3px;
+}
+.classname:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+}
+.classname:active {
+	position:relative;
+	top:1px;
+}
+#overlay{
+	display: none;
+	top:0px;
+	left:0px;
+	width: 100%;
+	height: 100%;
+	opacity: 1;
+	background: #000000;
+	position: fixed;
+	overflow: hidden;
+	z-index: 1000;
+}
+#frame{
+  border:none;
+  width: 960px;
+  min-height: 660px;
+  display: none;
+  left: 50%;
+  margin-left: -480px;
+  position: absolute;
+}
+#closeholder{
+  top:0px;
+  border:none;
+  width: 960px;
+  height: 30px;
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+  background: #000 url(/handlecsv/images/menutop-bg.png) 50% 0;	
+}
+#holder {
+    position: absolute;
+    left: 50%;
+}
+#button{
+	cursor: pointer;
+	margin-bottom: 3px;
+}
+#close{
+    position:absolute;
+    box-sizing: padding-box;
+	float: right;
+	margin-top: 5px;
+	margin-right:5px;
+    width: 13px;
+    height: 17px;
+    background-color: #fff;
+    color: rgba(2, 0, 0, 1);
+    border: 1px solid #eee;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    padding-left: 7px;
+    right: 0px;
+    box-shadow: 1px 1px 1px #CBB9F8;
+    text-shadow: 1px 1px #95E0C8;
+    padding-bottom: 2px;
+    z-index:1200;
+}
+
+#close:hover{
+    box-shadow: 2px 2px 1px #CBB9F8;
+    text-shadow: 1px 1px #95E0C8;
+	background-color: rgb(245, 245, 245);
+}
+
+.nsb_container {
+	float: right;
+	margin-right: 180px; 
+}
+a.flag {
+	float: left;
+	margin-top: 3px;
+}
+.translateText {
+	margin-top: 5px;
+	color: rgb(228, 228, 228);
+	font-size: 89%;
+}
+.feature-layout2 {
+    height: 320px;
+    overflow: hidden;
+}
+.feature-layout2 .title span {
+	background: url(/handlecsv/images/i-use-small.gif) 0px 6px no-repeat;
+	padding-left: 60px;
+}
+#iUseLogo {
+    top:70px;
+    left:5px;
+    position: absolute;
+}
+@media screen and (min-width:1461px) {
+    #iUseLogo {
+        background: url(/handlecsv/images/logo_250.png) no-repeat;
+        width: 250px;
+        height: 219px;
+    }
+}
+@media screen and (max-width:1460px) {
+    #iUseLogo {
+        background: url(/handlecsv/images/logo_200.png) no-repeat;
+        width: 200px;
+        height: 175px;
+    }
+}
+@media screen and (max-width:1360px) {
+    #iUseLogo {
+        background: url(/handlecsv/images/logo_150.png) no-repeat;
+        width: 150px;
+        height: 131px;
+    }
+}
+@media screen and (max-width:1260px) {
+    #iUseLogo {
+        background: url(/handlecsv/images/logo_100.png) no-repeat;
+        width: 100px;
+        height: 87px;
+    }
+}
+@media screen and (max-width:1159px) {
+	#iUseLogo {
+		display: none;
+	}
+}
+
+
+
+
