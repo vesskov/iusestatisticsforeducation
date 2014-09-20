@@ -101,7 +101,7 @@ var IUse = {
 	  }
 	  var height = jQuery(window).height();
 	  var width = jQuery(window).width();
-	  console.log(width, height);
+	  
 	  if (height > 650 && optionGraph == "earth") 
 	  	height = 650;
 	  if (width > height) {
@@ -110,7 +110,7 @@ var IUse = {
 	  	height = width/1.41;
 	  }
 	  var heightWindow = height - 20;
-	  console.log(width, height);
+	  
 	  var myIframe = jQuery("<iframe/>");
 	  var queryString = {
 	  	'type' : optionGraph,
@@ -322,7 +322,7 @@ var IUse = {
 	  		optionIndex = 0;
 	  		IUse.tableTitle = IUse.loadCsv;
 	  	}
-	  	console.log(IUse.jsonData);
+
 		IUse.jsonData['headlines'] = IUse.initialJsonData['headlines'].slice();
 		IUse.jsonData['datalines'] = newDataLinesArray.slice();		
 		IUse.jsonData['bottomlines'] = IUse.initialJsonData['bottomlines'].slice();
@@ -341,7 +341,7 @@ var IUse = {
 	getOptions: function (lines, optionIndex) {
 		var countOption = 0;
 		var options = [];
-		console.log(lines);
+
 		lines[optionIndex].forEach( function (option) {
 			//console.log(option);
 			if(countOption > 0) { 
@@ -867,6 +867,7 @@ var IUse = {
 		postFieldId.append(IUse.addValue(IUse.maxValue, 'valueMax'));
 		postFieldId.append(" color:");
 		postFieldId.append(IUse.addColorChooserHtml('picker2',IUse.colors[1]));
+		postFieldId.append(IUse.addMapCenter());
 		submitFieldId.append(IUse.addSubmit());
 		submitFieldId.append(IUse.addPrint());
 	},
@@ -1117,5 +1118,21 @@ var IUse = {
 		input.attr(inputAttr);
 		input.css(inputStyle);
 		return input;		
-	} 
+	}, 
+	
+	/**
+	 * @desc Creates an jQuery HTML object dropdown select menu
+	 * @name addMapCenter
+	 * @return html select list 
+	 */
+	addMapCenter: function() {
+		var selectAttr = {
+			id:"mapCenter" 
+		}; 
+		var selectMapCenter = jQuery("<select>").attr(selectAttr);
+		var selectOptionEurope = jQuery("<option>").attr({value:"europe"}).append("Map zoom Europe");
+		var selectOptionWorld = jQuery("<option>").attr({value:"world"}).append("Map zoom World");
+		selectMapCenter.append(selectOptionEurope, selectOptionWorld);
+		return selectMapCenter;		
+	}	
 } 

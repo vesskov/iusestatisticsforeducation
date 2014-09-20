@@ -27,7 +27,7 @@ if ( isset($_GET['csvInput']) && $_SESSION['return_json'] != '') {
   	<script>
   	    var displayHeight = <?php echo $_GET['h']?> - 50;
   	    var displayWidth = <?php echo $_GET['w']?>;
-  	    console.log(displayWidth, displayHeight);
+  	    
   	    var mapCenter = '<?php echo $_GET['mapcenter']?>';
   	    var mapArray = [];
   	    
@@ -86,8 +86,10 @@ if ( isset($_GET['csvInput']) && $_SESSION['return_json'] != '') {
 		      options['fontSize'] = 12;
 		  } else {
 		  	 options['fontSize'] = 14;
-		  	 if (mapCenter == 'europe') {
+		  	 if (jQuery("#mapCenter").val() == 'europe') {
 		  	 	options['region'] = 150;	
+		  	 } else {
+		  	 	options['zoom'] = 10;
 		  	 }
 		  }
 		  //console.log(mapArray);

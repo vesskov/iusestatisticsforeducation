@@ -50,10 +50,6 @@ if (pathname.match('world-statistics') != null ) {
 Chart your input<br>		
 <div id="vis"> </div>
 <textarea id="textCSV" rows="10" cols="50"></textarea><br /> <input onclick="IUse.getCsvTable(jQuery('#vis'), jQuery('textarea#textCSV').val());" type="button" value="submit" /></p>
-<select id="mapCenter">
-<option value="europe">Map zoom on Europe</option>
-<option value="world">Map zoom on World</option>
-</select>
 <div id="vis">This tool allows users to create a graph or map from their own data, with remarkable ease and speed. <span style="line-height: 1.3em;">Once entered, data will be visualised in a number of formats, added to a map if location data is available, and made available to download as a CSV file for use in other tools and applications.</span></div>
 <div>There is a simple format that is required for the data entry.</div>
 <div>Enter years in the following format e.g. ,2012,2013,2014 would plot the years 2012-2014</div>
