@@ -53,6 +53,7 @@ if ( isset($_GET['csvInput']) && $_SESSION['return_json'] != '') {
 		function drawVisualization() 
 		{
 			if (IUse.displayType == 'earth') {
+				jQuery('#visualization').css({'top':'70px'});
 				google.earth.createInstance('visualization', drawThreeD, failureThreeD);
 			} else {
 				drawGraph();
@@ -95,6 +96,8 @@ if ( isset($_GET['csvInput']) && $_SESSION['return_json'] != '') {
 
         function drawThreeD(instance) 
         {
+          var titleDiv = jQuery('<div>').append(IUse.tableTitle).attr({'id':'threeDTitle'});
+          jQuery('form').append(titleDiv);
           KML.ge = instance;
           KML.ge.getWindow().setVisibility(true);
           //console.log(IUse.minValue, IUse.maxValue);

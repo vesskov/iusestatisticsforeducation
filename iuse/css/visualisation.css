@@ -13,6 +13,13 @@ body,html {
 #choose_color_settings{
 	
 }
+#threeDTitle {
+	height: 45px;
+	font-size: 1.8em;
+	padding: 5px;
+	color: rgb(137, 182, 182);
+	background: rgb(0, 0, 0);	
+}
 #visualization{
 	max-width: 960px; 
 	max-height:610px;

@@ -75,12 +75,12 @@ var KML = {
 		<ScreenOverlay>\
 			<name>Legend</name>\
 			<Icon>\
-				<href><![CDATA["Description"]]></href>\
+				<href>http://i-use.eu/handlecsv/images/logo_55.png</href>\
 			</Icon>\
-			<description><![CDATA["Description"]]></description>\
-			<overlayXY x="0.01" y="0.15" xunits="fraction" yunits="fraction"/>\
-			<screenXY x="0.01" y="0.15" xunits="fraction" yunits="fraction"/>\
-			<size x="100" y="100" xunits="pixels" yunits="pixels"/>\
+			<description><![CDATA[<h1>I Use logo</h1>]]></description>\
+			<overlayXY x="0.01" y="0.01" xunits="fraction" yunits="fraction"/>\
+			<screenXY x="0.01" y="0.01" xunits="fraction" yunits="fraction"/>\
+			<size x="55" y="48" xunits="pixels" yunits="pixels"/>\
 		</ScreenOverlay>\
 </Document>\
 </kml>';
@@ -170,9 +170,10 @@ var KML = {
 		var screenOverlay = addElement('ScreenOverlay'); 
 		screenOverlay.append(addElement('name', name));
 		var icon = addElement('Icon');
-		icon.append(addElement('href'));
+		icon.append(addElement('href', '<![CDATA['+ KML.logoUrl +']]>'));
 		var url = KML.textUrl + text;
-		screenOverlay.append(addElement('href', '<![CDATA['+ url +']]>'));
+		//screenOverlay.append(addElement('href', '<![CDATA['+ KML.logoUrl +']]>'));
+		screenOverlay.append(icon);
 		/**
 	
 		*/
