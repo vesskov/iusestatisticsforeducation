@@ -8,17 +8,18 @@ if (isset($_GET['csvFile'])) {
 	);
 	$result = new ReadCsv($params);
 	$return_json = $result->returnJson();
-}
-if ( isset($_GET['csvInput']) && $_SESSION['return_json'] != '') {
-	$return_json = $_SESSION['return_json'];	
+} else {
+	$return_json = FALSE;
 }
 ?>
   
 <!DOCTYPE HTML>
 <html>
   <head>
+  	<meta charset="UTF-8">
   	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   	<script src="http://www.google.com/jsapi"></script>
+  	<script src="./js/jquery.cookie.js"></script>
   	<script src="./js/iuse.js"></script>
 	<script src="./js/countries.js"></script>
 	<script src="./js/kml.js"></script>
@@ -27,12 +28,23 @@ if ( isset($_GET['csvInput']) && $_SESSION['return_json'] != '') {
   	<script>
   	    var displayHeight = <?php echo $_GET['h']?> - 50;
   	    var displayWidth = <?php echo $_GET['w']?>;
-  	    
-  	    var mapCenter = '<?php echo $_GET['mapcenter']?>';
+  	    IUse.displayType = "<?php echo $_GET['type']?>";
+  	    IUse.sortColumn = <?php echo $_GET['sc']?>;
+  	    IUse.order = <?php echo $_GET['o']?>;
   	    var mapArray = [];
-  	    
-		IUse.prepareCsvInput(<?php echo $return_json; ?>, "<?php echo $_GET['type']?>", "<?php echo $_GET['d']?>");
- 		
+  	    IUse.jsonData = jQuery.parseJSON(jQuery.cookie("jsonData"));
+  	    IUse.sortJsonData();
+        if (IUse.chartType == "BarChart" && IUse.displayType == "graph") 
+            IUse.calculateMultiColumn();
+        else
+            IUse.calculateSingleColumn();
+  	    //console.log(postedJsonData);
+  	    if (<?php echo $return_json;?>.length == 0) {
+  	    	console.log('result');
+  	    }
+  	    //var jsonDataSorted = IUse.sortJsonData(); 
+		//IUse.prepareCsvInput(<?php echo $return_json;?>, "<?php echo $_GET['type']?>", "<?php echo $_GET['d']?>");
+ 		//console.log(IUse.jsonData);
  		
  		if (IUse.displayType == 'map') {
  			google.load("visualization", "1", {packages: ["geochart"]});
