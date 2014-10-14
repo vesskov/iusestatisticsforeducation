@@ -95,10 +95,7 @@ var IUse = {
      * @param mapCenter - where does the user want the map to be zoomed at
 	 * @return void
 	 */
-	openChart: function (optionGraph, mapCenter) {
-	  if (jQuery("#mapCenter").val() != undefined ) {
-	  		mapCenter = jQuery("#mapCenter").val()
-	  }
+	openChart: function (optionGraph) {
 	  var height = jQuery(window).height();
 	  var width = jQuery(window).width();
 	  
@@ -111,17 +108,19 @@ var IUse = {
 	  }
 	  var heightWindow = height - 20;
 	  
+	  jQuery.cookie("jsonData", JSON.stringify(IUse.jsonData));
+	  
 	  var myIframe = jQuery("<iframe/>");
 	  var queryString = {
 	  	'type' : optionGraph,
-	  	'mapcenter' : mapCenter,
 	  	'csvFile': IUse.loadCsv,
 	  	'csvInput':'csv',
 	  	'w' : width,
 	  	'h' : heightWindow,
 	  	'd' : IUse.deleteArray.join(":"),
+	  	'sc': IUse.sortColumn,
+	  	'o' : IUse.order
 	  };
-	  //console.log(queryString);
 	  myIframe.attr({	
 	  	'src':this.mainDir+'/displaygraph.php?'+jQuery.param(queryString), 
 	  	'width':width+'px', 
@@ -175,7 +174,7 @@ var IUse = {
 	/**
 	 * @desc Constructs the main parameters for the display of the data
 	 * @name prepareCsvInput
-	 * @param jsonData - json object returned by asynchronous call to the server 
+	 * @param jsonData - json object  
 	 * @param displayType - string 
 	 * @param deleteString - array
 	 */
@@ -200,7 +199,6 @@ var IUse = {
  		KML.colorMin = IUse.colors[0];
     },
     
-	
 	/**
 	 * @desc Get the CSV file from the server in JSON format 
 	 * @param id - HTML id of the DOM object
@@ -222,11 +220,10 @@ var IUse = {
 			IUse.csvInput = csvInput + "\n Created with http://i-use.eu/ \n";
 			//console.log(IUse.csvInput);
 			jQuery.post( this.mainDir+"/return-json.php", {csvInput:IUse.csvInput}, function( data ) {
-                //console.log(data);
                 IUse.initialJsonData = jQuery.parseJSON(data);
 			  	IUse.fixInitialData();
 			  	IUse.processDataArray();
-			  	console.log(IUse.initialJsonData);
+			  	//console.log(IUse.initialJsonData);
 			  	IUse.buildTable(IUse.htmlElement, IUse.jsonData['headlines'] , IUse.jsonData['datalines'] , IUse.jsonData['bottomlines']);
 			  	if (IUse.initialJsonData['uid'] != undefined) {
 		            var urlAddress = "http://i-use.eu/userinput/"+IUse.initialJsonData['uid']+".html";
@@ -253,6 +250,31 @@ var IUse = {
 		        }
 			});			
 		}	
+	},
+	
+	/**
+	 * @desc function that sorts the json data lines used for drawing ordered graphs
+	 * @name sortJsonData
+	 * @param iuseJsonData - sent as GET parameter from the input submit page
+	 * @return  ordered json data array
+	 */
+	sortJsonData: function() {
+		//If no order selected return original array
+		if (IUse.order == 3)
+			return;
+		var datalines = IUse.jsonData['datalines'].slice();
+
+		if (IUse.sortColumn != 0) {
+			datalines.sort(IUse.sortIt);
+		} else {
+			if (IUse.order == 2) {
+				datalines.sort();
+			} else {
+				datalines.reverse();
+			}
+		}
+		IUse.jsonData['datalines'] =  datalines.slice();
+		//return 	iuseJsonData;
 	},
         
     /**
@@ -356,9 +378,11 @@ var IUse = {
      * @desc sortable function
      */
 	sortIt: function (a, b) {
-        //console.log(IUse.sortColumn);
-		if (IUse.sortColumn != 1) {
+        
+		if (IUse.sortColumn != 1 && IUse.sortColumn != a.length) {
 			var aVal = parseFloat(a[IUse.sortColumn]) || 0, bVal = parseFloat(b[IUse.sortColumn]) || 0;
+		} else if (IUse.sortColumn == a.length) {
+			var aVal = parseFloat(a[a.length - 1] - a[1]) || 0, bVal = parseFloat(b[b.length - 1] - b[1]) || 0;  
 		} else {
             var aVal = a[IUse.sortColumn], bVal = b[IUse.sortColumn];
         }
@@ -433,9 +457,9 @@ var IUse = {
 		id.html("");
 		id.append(IUse.addMainButton('Initial', 'IUse.rebuildCsvTable(1)'));
 		id.append(IUse.addMainButton('CSV', 'IUse.downloadCSV()'));
-		id.append(IUse.addMainButton('Graph', 'IUse.openChart(\'graph\', mapCenter);window.location.href=\'#graph\';'));
-		id.append(IUse.addMainButton('Map', 'IUse.openChart(\'map\', mapCenter);window.location.href=\'#map\';'));
-		id.append(IUse.addMainButton('3D Map', 'IUse.openChart(\'earth\', mapCenter);window.location.href=\'#earth\';'));
+		id.append(IUse.addMainButton('Graph', 'IUse.openChart(\'graph\');window.location.href=\'#graph\';'));
+		id.append(IUse.addMainButton('Map', 'IUse.openChart(\'map\');window.location.href=\'#map\';'));
+		id.append(IUse.addMainButton('3D Map', 'IUse.openChart(\'earth\');window.location.href=\'#earth\';'));
 		id.append(IUse.addMainButton('Print', 'IUse.printTable();'));
 		id.append(IUse.addMainButton('Remove unselected', 'IUse.rebuildCsvTable(0);'));
 		id.append("<br/>");
