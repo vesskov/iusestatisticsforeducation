@@ -7,6 +7,7 @@ var IUse = {
 	loadCsv : "",
 	csvInput:"",
 	sortColumn : 0,
+	calcGrowth : 0,
 	order : 3,
 	//Index of the column to be shown
 	tableIndex: 1,
@@ -305,6 +306,21 @@ var IUse = {
 	  	IUse.processDataArray(IUse.initialJsonData);
 	  	IUse.buildTable(IUse.htmlElement, IUse.jsonData['headlines'] , IUse.jsonData['datalines'] , IUse.jsonData['bottomlines']);		
 	},
+
+    /**
+     * @desc swap calcGrowth and rebuild table
+     * @name addRemoveGrowth
+     * @return void
+     */	
+	addRemoveGrowth: function() {
+		if(IUse.calcGrowth == 0) 
+			IUse.calcGrowth = 1;
+		else 
+			IUse.calcGrowth = 0;
+
+	  	//IUse.processDataArray(IUse.initialJsonData);
+	  	IUse.buildTable(IUse.htmlElement, IUse.jsonData['headlines'] , IUse.jsonData['datalines'] , IUse.jsonData['bottomlines']);		
+	},
         
     /**
      * @desc remove rows from initial JSON which index is in deleteArray, convert empty space to slash, parse float the data value
@@ -453,6 +469,10 @@ var IUse = {
      */
 	buildTable: function(id, headlines, datalines, bottomlines) {
 		IUse.htmlElement = id;
+		if (IUse.calcGrowth == 0) 
+			var calcGrowthText = "Add Growth";
+		else 
+			var calcGrowthText = "Remove Growth";
 		
 		id.html("");
 		id.append(IUse.addMainButton('Initial', 'IUse.rebuildCsvTable(1)'));
@@ -460,6 +480,7 @@ var IUse = {
 		id.append(IUse.addMainButton('Graph', 'IUse.openChart(\'graph\');window.location.href=\'#graph\';'));
 		id.append(IUse.addMainButton('Map', 'IUse.openChart(\'map\');window.location.href=\'#map\';'));
 		id.append(IUse.addMainButton('3D Map', 'IUse.openChart(\'earth\');window.location.href=\'#earth\';'));
+		id.append(IUse.addMainButton(calcGrowthText, 'IUse.addRemoveGrowth();'));
 		id.append(IUse.addMainButton('Print', 'IUse.printTable();'));
 		id.append(IUse.addMainButton('Remove unselected', 'IUse.rebuildCsvTable(0);'));
 		id.append("<br/>");
@@ -496,7 +517,7 @@ var IUse = {
 				} 
 			});
 			/* Add trend column */
-			if ( count > 1 ) {
+			if ( count > 1 && IUse.calcGrowth == 1) {
 				td = jQuery("<td>");
 				td.append("Growth ");	
 				td.append( row[1], " - " ,row[row.length-1]);	
@@ -536,21 +557,24 @@ var IUse = {
                     
 				tr.append(td);
 				countColumn++;
-			});			
-			trend = ( ( parseFloat(row[countColumn-1]) - parseFloat(row[2]) )*100 / parseFloat(row[2]) );  
-			if (trend == undefined || isNaN(trend)) {
-				trend = "-";
-			} else {
-			    trend = Number((parseFloat(trend)).toFixed(2));
+			});
+			
+			if (IUse.calcGrowth == 1) {		
+				trend = ( ( parseFloat(row[countColumn-1]) - parseFloat(row[2]) )*100 / parseFloat(row[2]) );  
+				if (trend == undefined || isNaN(trend)) {
+					trend = "-";
+				} else {
+				    trend = Number((parseFloat(trend)).toFixed(2));
+				}
+				//console.log(row[countColumn-1], row[2])
+				td = jQuery("<td>");
+				td.attr({"class":classRow + " alignRight"});
+				td.append(trend);
+				if (trend != "-")
+				    td.append("%");
+				//console.log(trend);
+				tr.append(td);
 			}
-			//console.log(row[countColumn-1], row[2])
-			td = jQuery("<td>");
-			td.attr({"class":classRow + " alignRight"});
-			td.append(trend);
-			if (trend != "-")
-			    td.append("%");
-			//console.log(trend);
-			tr.append(td);
 			table.append(tr);
 		});
 		
