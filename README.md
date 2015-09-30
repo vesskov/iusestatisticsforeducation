@@ -16,7 +16,7 @@ Names
 Here we define the names we use. Key, value representations. 
 Key -  is a generic unique name, example "Greece". So when a user inputs "Greece" in his datatable the application tries to locate which values it should get for a KML border. This is done by looking at the value for the given key.
 
-Value - is a short abreviation, example "GR". This value corresponds to a border definition in the borders section. 
+Value - is a short abbreviation, example "GR". This value corresponds to a border definition in the borders section. 
 
 To anticipate input errors, the system is designed to have different keys with the same value. Example:
 ....
