@@ -3,7 +3,7 @@ iusestatisticsforeducation
 
 Project website: http://www.i-use.eu/
 
-I Use Statistics for Education
+I-Use Statistics for Education
 
 Configuration file Countries.js explained.
 
@@ -11,7 +11,7 @@ The configuration consists of two main parts.
 -	Borders 
 -	Names
 
-Names
+Names:
 
 Here we define the names we use. Key, value representations. 
 Key -  is a generic unique name, example "Greece". So when a user inputs "Greece" in his datatable the application tries to locate which values it should get for a KML border. This is done by looking at the value for the given key.
